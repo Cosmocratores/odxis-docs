@@ -2,6 +2,8 @@
 
 # ODXIS — Enterprise ERP SaaS
 
+> A product of **[Cosmocratores SAS](https://cosmocratores.github.io)** · Support: help@odxis.com
+
 ### Multi-Tenant Resource Planning Platform for Colombian Businesses
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
