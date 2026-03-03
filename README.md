@@ -1,268 +1,162 @@
 <div align="center">
 
-# ODXIS — Enterprise ERP SaaS
+# ODXIS — Tu negocio, bajo control
 
-> A product of **[Cosmocratores SAS](https://cosmocratores.github.io)** · Support: help@odxis.com
+> Un producto de **[Cosmocratores SAS](https://cosmocratores.github.io)** · Soporte: help@odxis.com · [odxis.com](https://odxis.com)
 
-### Multi-Tenant Resource Planning Platform for Colombian Businesses
+### La plataforma que administra todos los aspectos de tu negocio en un solo lugar
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
-[![tRPC](https://img.shields.io/badge/tRPC-11-blue?logo=trpc)](https://trpc.io)
-[![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?logo=prisma)](https://prisma.io)
-[![Auth.js](https://img.shields.io/badge/Auth.js-v5-purple)](https://authjs.dev)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-316192?logo=postgresql)](https://postgresql.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript)](https://typescriptlang.org)
+[![Status](https://img.shields.io/badge/Estado-En_Desarrollo-blue?style=for-the-badge)]()
+[![Modules](https://img.shields.io/badge/17_Módulos-Integrados-22543d?style=for-the-badge)]()
+[![Compliance](https://img.shields.io/badge/DIAN-Certificado-e53e3e?style=for-the-badge)]()
 
 </div>
 
 ---
 
-## What is Odxis?
+## ¿Qué es Odxis?
 
-**Odxis** is a full-featured, multi-tenant ERP SaaS platform designed for Colombian commerce and hospitality businesses. It provides **17 fully integrated modules** within a single codebase — from inventory management and point-of-sale to hotel operations, payroll (CST 2024 compliant), electronic invoicing (DIAN), and a learning management system.
+Odxis es un **sistema completo de administración empresarial** diseñado para negocios colombianos — comercios, restaurantes, hoteles y empresas de servicios.
 
-Every tenant's data is isolated at the row level via `organizationId`, enforced at the tRPC middleware layer. The RBAC system provides **35 granular permissions** across **10 predefined roles**, from Owner to Viewer.
+En vez de usar 5 programas diferentes (uno para facturas, otro para inventario, otro para nómina...), Odxis lo integra **todo en una sola plataforma**:
 
-> **Note:** This repository contains technical documentation and architecture research. The source code is maintained in a private repository.
+- Llevas tus **facturas electrónicas** como la DIAN lo exige
+- Controlas tu **inventario** sin sorpresas de faltantes
+- Administras tu **nómina** con todo lo que la ley colombiana pide
+- Manejas las **reservas del hotel** o las **mesas del restaurante**
+- Y al final del mes tienes **reportes financieros reales**, no suposiciones
 
----
-
-## At a Glance
-
-| Metric | Value |
-|--------|-------|
-| **Modules** | 17 operational + infrastructure |
-| **Prisma Models** | 68 data models |
-| **Enums** | 50 type definitions |
-| **Schema Lines** | 2,172 |
-| **Source Lines** | 30,887+ TypeScript/TSX |
-| **tRPC Routers** | 18 (328KB) |
-| **Enterprise Services** | 10 |
-| **RBAC Permissions** | 35 atomic permissions |
-| **Roles** | 10 predefined (Owner → Viewer) |
-| **Compliance** | DIAN UBL 2.1, CST 2024 payroll |
+> **Menos estrés de papeleo. Más tiempo para hacer crecer tu negocio.**
 
 ---
 
-## Tech Stack
+## ¿Qué puedes hacer con Odxis?
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Framework** | Next.js 15 (App Router, Turbopack) | Full-stack React framework |
-| **API** | tRPC 11 | End-to-end type-safe RPC |
-| **ORM** | Prisma 6 | Database access + migrations |
-| **Auth** | Auth.js v5 (NextAuth) | Authentication + session management |
-| **UI** | Tailwind CSS v4 + shadcn/ui | Component library |
-| **Animations** | Framer Motion 12 | UI transitions |
-| **Database** | Azure PostgreSQL 16 (PgBouncer) | Managed relational database |
-| **Hosting** | Vercel | Serverless deployment |
-| **Rate Limiting** | Upstash Redis | API abuse prevention |
-| **Payments** | Wompi | Colombian payment gateway |
-| **Invoicing** | Dataico API | DIAN electronic invoicing |
-| **Monitoring** | Sentry | Error tracking + performance |
-| **Testing** | Vitest + Coverage v8 | Unit & integration tests |
+### Operación del día a día
 
----
+| Módulo | Qué hace por ti |
+|--------|----------------|
+| **Inventario** | Sabes exactamente qué tienes, dónde está, y cuánto vale. Incluye recetas y transferencias entre bodegas. |
+| **Punto de Venta (POS)** | Tu caja registradora digital: toma pedidos, aplica descuentos, controla el efectivo. |
+| **Pantalla de Cocina (KDS)** | El cocinero ve los pedidos en tiempo real, sin papeles ni gritos. |
+| **CRM** | Tu lista de clientes organizada: desde el primer contacto hasta la venta cerrada. |
+| **Ventas** | Seguimiento de oportunidades comerciales y pipeline de ventas. |
+| **Aliados Comerciales** | Gestión de revendedores y distribuidores. |
 
-## Modules
+### Finanzas y cumplimiento legal
 
-### Core Business
+| Módulo | Qué hace por ti |
+|--------|----------------|
+| **Contabilidad** | Plan Único de Cuentas (PUC), asientos automáticos, conciliación bancaria. |
+| **Facturación Electrónica** | Facturas válidas ante la DIAN (UBL 2.1). Todo automático: CUFE, notas crédito/débito, resoluciones. |
+| **Reportes** | Estado de resultados, balance general, flujo de caja. Los números reales de tu negocio. |
 
-| Module | Router | Key Features |
-|--------|--------|-------------|
-| 🏭 **Inventory** | `inventory` | Products, variants, BOM/recipes, warehouses, stock movements, weighted average costing |
-| 🛒 **POS** | `pos` | Point of sale, orders, payments, tables, cash register open/close, discounts |
-| 📺 **KDS** | `kds` | Kitchen Display System — real-time order tracking for kitchen staff |
-| 👥 **CRM** | `crm` | Customer lifecycle: Lead → Prospect → Client |
-| 📊 **Sales** | `sales` | Sales pipeline management |
-| 🤝 **Partners** | `partners` | Channel partner / reseller management |
+### Personal y operaciones
 
-### Finance & Compliance
+| Módulo | Qué hace por ti |
+|--------|----------------|
+| **Nómina y RRHH** | Nómina colombiana completa: seguridad social, prestaciones, horas extra, vacaciones, dotación. Actualizado al CST 2024. |
+| **Hotel (PMS)** | Habitaciones, reservas, check-in/out, cargos a habitación, ama de llaves, historial de huéspedes. |
+| **Academia (LMS)** | Capacita a tu equipo: cursos, lecciones, seguimiento de progreso. |
+| **Soporte** | Sistema de tickets para atención al cliente con categorías y tiempos de respuesta. |
+| **Servicios** | Catálogo de servicios, profesionales, citas y agendamiento. |
 
-| Module | Router | Key Features |
-|--------|--------|-------------|
-| 📒 **Accounting** | `accounting` | Chart of accounts (PUC), journal entries, fiscal periods, bank reconciliation |
-| 🧾 **Invoicing** | `invoicing` | DIAN electronic invoicing (UBL 2.1 XML), CUFE, credit/debit notes, Dataico integration |
-| 📈 **Reporting** | `reporting` | P&L, Balance Sheet, Cash Flow, custom financial reports |
+### Plataforma
 
-### People & Operations
-
-| Module | Router | Key Features |
-|--------|--------|-------------|
-| 👔 **HR / Payroll** | `hr` | Full Colombian payroll (CST 2024): social security, overtime, leave management, uniform tracking |
-| 🏨 **PMS (Hotel)** | `pms` | Rooms, reservations, check-in/out, room charges, housekeeping, guest history |
-| 🎓 **Academy LMS** | `academy` | Courses, lessons, enrollments, progress tracking |
-| 🎫 **Support** | `support` | Ticket system, categories, SLA, knowledge base |
-| 💼 **Services** | `services` | Service catalog, professionals, appointments |
-
-### Platform
-
-| Module | Router | Key Features |
-|--------|--------|-------------|
-| 🔐 **Auth** | `auth` | Registration, login, RBAC (35 permissions, 10 roles), 2FA (TOTP/SMS) |
-| 📝 **Blog** | `blog` | Posts, categories, SEO metadata |
-| 💳 **Subscriptions** | `subscription` | Plans: EMPRENDEDOR / CRECIMIENTO / EMPRESA, Wompi billing |
-| 🏢 **Organization** | `organization` | Tenant configuration, active modules, settings |
+| Módulo | Qué hace por ti |
+|--------|----------------|
+| **Seguridad y Roles** | Cada empleado ve solo lo que necesita. 10 roles predefinidos (dueño, cajero, mesero, recepcionista...) con 35 permisos específicos. |
+| **Blog** | Publica contenido desde tu panel. |
+| **Suscripciones** | Planes EMPRENDEDOR, CRECIMIENTO y EMPRESA según el tamaño de tu negocio. |
 
 ---
 
-## Architecture
+## ¿Cómo funciona por dentro? (para técnicos)
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        VERCEL EDGE                          │
-├─────────────────────────────────────────────────────────────┤
-│  Next.js 15 App Router                                      │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────────────┐│
-│  │  (public)/   │ │  (auth)/     │ │  (dashboard)/        ││
-│  │  Landing     │ │  Login       │ │  Protected UI        ││
-│  │  Blog (SSR)  │ │  Register    │ │  17 Module Views     ││
-│  └──────────────┘ └──────────────┘ └──────────────────────┘│
-├─────────────────────────────────────────────────────────────┤
-│  tRPC 11 API Layer                                          │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │  Middleware Chain:                                      │ │
-│  │  Auth → Rate Limit → Org Isolation → RBAC → Handler    │ │
-│  │                                                         │ │
-│  │  17 Sub-Routers  ·  10 Enterprise Services              │ │
-│  └────────────────────────────────────────────────────────┘ │
-├─────────────────────────────────────────────────────────────┤
-│  Prisma 6 ORM                                               │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────────────┐│
-│  │  68 Models   │ │  50 Enums    │ │  Row-Level Isolation  ││
-│  │  2172 Lines  │ │  Type Safety │ │  via organizationId   ││
-│  └──────────────┘ └──────────────┘ └──────────────────────┘│
-├─────────────────────────────────────────────────────────────┤
-│  Azure PostgreSQL 16 (PgBouncer) · Upstash Redis            │
-└─────────────────────────────────────────────────────────────┘
-```
+Odxis está construido con tecnologías modernas y probadas:
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed diagrams and data flow.
+| Componente | Tecnología | Para qué sirve |
+|------------|-----------|----------------|
+| Aplicación web | Next.js 15 con TypeScript | Interfaz rápida y confiable |
+| Comunicación | tRPC 11 | Los datos viajan seguros entre pantalla y servidor |
+| Base de datos | PostgreSQL 16 en Azure | Almacenamiento confiable y escalable |
+| ORM | Prisma 6 | 68 modelos de datos organizados |
+| Autenticación | Auth.js v5 + 2FA | Acceso seguro con verificación en dos pasos |
+| Interfaz | Tailwind CSS + shadcn/ui | Diseño limpio y profesional |
+| Pagos | Wompi | Pagos con tarjeta y PSE para Colombia |
+| Facturación DIAN | Dataico API | Envío oficial de facturas electrónicas |
+| Seguridad | Rate limiting, audit trail | Protección contra abuso y registro de todo lo que pasa |
+
+### Cada negocio, aislado
+
+Los datos de tu negocio **nunca se mezclan** con los de otros clientes. Cada registro está identificado con tu `organizationId` y verificado automáticamente en cada operación.
 
 ---
 
-## Enterprise Services
+## Cumplimiento colombiano
 
-| Service | File | Description |
-|---------|------|-------------|
-| **DIAN Invoicing** | `dian.ts` | XML UBL 2.1 generation + Dataico API integration |
-| **DIAN Resolution** | `dian-resolution.ts` | Validation of DIAN resolutions (range, expiry) |
-| **RUT Validation** | `rut-validation.ts` | Online RUT validation + 48h cache |
-| **Withholding Tax** | `withholding-auto.ts` | Automatic withholding calculation (RENTA/IVA/ICA) |
-| **Accounting Helpers** | `accounting-helpers.ts` | Automatic journal entries (POS, payroll, costs) |
-| **Payroll Calculator** | `payroll-calculator.ts` | Full CST 2024 Colombian payroll |
-| **Inventory Costing** | `inventory-costing.ts` | Weighted average costing + Kardex |
-| **Financial Reporting** | `financial-reporting.ts` | P&L, Balance Sheet, Cash Flow |
-| **Two-Factor Auth** | `two-factor.ts` | TOTP/SMS 2FA + backup codes |
-| **Audit Export** | `audit-export.ts` | Audit trail export (CSV/PDF/JSON) |
+### Facturación electrónica DIAN
+- Formato UBL 2.1 (el que exige la DIAN)
+- Código CUFE generado automáticamente
+- Notas crédito y débito electrónicas
+- Validación de resoluciones (prefijo, rango, vigencia)
+- Integración directa con Dataico para envío oficial
 
----
+### Nómina — CST 2024
+Todo lo que la ley laboral colombiana exige:
+- Seguridad social (EPS, pensión, ARL)
+- Parafiscales (SENA, ICBF, caja de compensación)
+- Prestaciones (cesantías, intereses, prima, vacaciones)
+- Horas extra (diurna 125%, nocturna 175%, dominical 200%)
+- Auxilio de transporte para salarios ≤2 SMLMV
+- Fondo de solidaridad para salarios >4 SMLMV
+- Licencias: vacaciones, incapacidad, maternidad/paternidad
+- Retención en la fuente
 
-## Security Model
-
-### RBAC — Role-Based Access Control
-
-**35 atomic permissions** organized by module:
-
-- **Dashboard**: `VIEW_DASHBOARD`
-- **Inventory**: `VIEW_INVENTORY`, `MANAGE_INVENTORY`, `MANAGE_WAREHOUSES`, `MANAGE_BOM`, `MANAGE_TRANSFERS`
-- **POS**: `VIEW_POS`, `MANAGE_POS`, `MANAGE_CASH_REGISTER`, `APPLY_DISCOUNTS`, `VOID_ORDERS`, `VIEW_POS_METRICS`
-- **KDS**: `VIEW_KDS`, `MANAGE_KDS`
-- **CRM**: `VIEW_CRM`, `MANAGE_CRM`
-- **Accounting**: `VIEW_ACCOUNTING`, `MANAGE_ACCOUNTING`, `VIEW_REPORTS`
-- **Invoicing**: `VIEW_INVOICES`, `MANAGE_INVOICES`, `EMIT_ELECTRONIC_INVOICE`
-- **HR**: `VIEW_PAYROLL`, `MANAGE_PAYROLL`, `MANAGE_EMPLOYEES`, `MANAGE_SHIFTS`
-- **Hotel**: `VIEW_ROOMS`, `MANAGE_ROOMS`, `MANAGE_RESERVATIONS`, `MANAGE_HOUSEKEEPING`, `CHARGE_TO_ROOM`
-- **Academy/Support**: `VIEW_ACADEMY`, `MANAGE_ACADEMY`, `MANAGE_SUPPORT`
-- **Admin**: `MANAGE_USERS`, `MANAGE_LOCATIONS`, `MANAGE_ORGANIZATION`, `VIEW_AUDIT_LOGS`, `MANAGE_BILLING`
-
-### 10 Predefined Roles
-
-| Role | Scope |
-|------|-------|
-| **OWNER** | All permissions |
-| **ADMIN** | All except billing |
-| **CONTADOR** | Accounting, invoicing, payroll, reports, audit |
-| **CAJERO** | POS, cash register, inventory view, CRM view |
-| **MESERO** | POS orders, KDS view |
-| **RECEPCIONISTA** | Hotel reservations, CRM, POS, support |
-| **RRHH** | Employees, shifts, payroll, reports |
-| **CHEF** | KDS, BOM/recipes, inventory view |
-| **MEMBER** | Dashboard, inventory/POS/CRM view |
-| **VIEWER** | Dashboard only |
-
-### Additional Security
-
-- **2FA**: TOTP + SMS + backup codes
-- **Rate Limiting**: Upstash Redis per-endpoint throttling
-- **Audit Trail**: Immutable `AuditLog` with before/after snapshots
-- **Multi-tenant isolation**: Row-level via `organizationId` enforced in tRPC middleware
-- **Session management**: Auth.js v5 with JWT + database sessions
+### Impuestos
+- IVA: 19%, 5%, exento, excluido
+- INC: 8% impuesto al consumo
+- Retenciones automáticas (renta, IVA, ICA)
+- Validación de RUT en línea con la DIAN
 
 ---
 
-## Colombian Compliance
+## Roles de usuario
 
-### DIAN Electronic Invoicing
+Cada persona en tu negocio tiene acceso solo a lo que necesita:
 
-- **UBL 2.1** XML generation via `dian.ts`
-- **CUFE** (Código Único de Facturación Electrónica) generation
-- **Resolution validation**: prefix, range, expiry dates
-- **Credit/debit notes** with electronic signatures
-- **Dataico API** integration for official DIAN submission
-
-### Payroll — CST 2024
-
-Full compliance with Colombian labor law (Código Sustantivo del Trabajo):
-
-- Social security (EPS 4%, pension 4%, ARL 0.522-6.960%)
-- Parafiscales (SENA 2%, ICBF 3%, Caja de Compensación 4%)
-- Prestaciones sociales (cesantías, intereses, prima, vacaciones)
-- Overtime types: diurna (125%), nocturna (175%), dominical (200%)
-- Transport allowance for ≤2 SMLMV
-- Solidarity fund for >4 SMLMV
-- Leave management: vacaciones, incapacidad, maternidad/paternidad
-- Withholding tax (retención en la fuente) calculation
-
-### Tax System
-
-- **IVA**: 19%, 5%, exempt, excluded
-- **INC**: 8% consumption tax
-- **Withholding**: Automatic RENTA, IVA, ICA calculation
-- **RUT validation**: Online DIAN lookup with 48h cache
+| Rol | Lo que puede hacer |
+|-----|--------------------|
+| **Dueño** | Todo, incluyendo facturación |
+| **Administrador** | Todo excepto facturación |
+| **Contador** | Contabilidad, facturación, nómina, reportes |
+| **Cajero** | Punto de venta, caja, consultar inventario |
+| **Mesero** | Tomar pedidos, ver pantalla de cocina |
+| **Recepcionista** | Reservas de hotel, CRM, punto de venta |
+| **RRHH** | Empleados, turnos, nómina |
+| **Chef** | Pantalla cocina, recetas, consultar inventario |
+| **Miembro** | Ver dashboard, inventario y ventas |
+| **Observador** | Solo ver el dashboard |
 
 ---
 
-## Documentation
+## Documentación técnica
 
-| Document | Description |
-|----------|-------------|
-| [README.md](README.md) | This file — project overview |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | System design with Mermaid diagrams |
-| [MODULES.md](MODULES.md) | Detailed module breakdown |
-| [SECURITY.md](SECURITY.md) | Security model & compliance |
-| [TECH_STACK.md](TECH_STACK.md) | Technology choices & rationale |
-
----
-
-## Competencies Demonstrated
-
-This project demonstrates production-level expertise in:
-
-- **Enterprise Architecture** — Multi-tenant SaaS with 17 modules in a single monolith
-- **Type-Safe Full Stack** — End-to-end type safety from Prisma → tRPC → React
-- **Domain Modeling** — 68 data models covering inventory, finance, HR, hospitality
-- **Regulatory Compliance** — DIAN electronic invoicing, Colombian payroll law
-- **Security Engineering** — RBAC, 2FA, audit trails, rate limiting
-- **API Design** — 18 tRPC routers with middleware chains
-- **Financial Systems** — Double-entry accounting, tax calculation, financial reporting
+| Documento | Contenido |
+|-----------|-----------|
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Diseño del sistema con diagramas |
+| [MODULES.md](MODULES.md) | Detalle de cada módulo |
+| [SECURITY.md](SECURITY.md) | Modelo de seguridad y cumplimiento |
+| [TECH_STACK.md](TECH_STACK.md) | Tecnologías y razones de elección |
 
 ---
 
 <div align="center">
 
-**Private Repository:** [github.com/Cosmocratores/odxis](https://github.com/Cosmocratores/odxis)
+**Código fuente:** [github.com/Cosmocratores/odxis](https://github.com/Cosmocratores/odxis) (privado)
 ·
-**Live:** [odxis.vercel.app](https://odxis.vercel.app)
+**Web:** [odxis.com](https://odxis.com)
+·
+**Contacto:** help@odxis.com
 
 </div>
