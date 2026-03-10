@@ -153,8 +153,6 @@ Cada persona en tu negocio tiene acceso solo a lo que necesita:
 
 <div align="center">
 
-**Código fuente:** [github.com/Cosmocratores/odxis](https://github.com/Cosmocratores/odxis) (privado)
-·
 **Web:** [odxis.com](https://odxis.com)
 ·
 **Contacto:** help@odxis.com
